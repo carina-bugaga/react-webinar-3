@@ -26,3 +26,13 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+// Склонение слова "раз/раза"
+export function declensionNumberOfTimes(times) {
+  if ([11, 12, 13, 14].includes(times)) return 'раз';
+  else if ([0, 1, 5, 6, 7, 8, 9].includes(times % 10)) {
+    return 'раз';
+  } else {
+    return 'раза';
+  }
+}

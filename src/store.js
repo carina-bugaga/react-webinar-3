@@ -70,7 +70,7 @@ class Store {
   }
 
   /**
-   * Выделение записи по коду
+   * Выделение записи по коду и подсчет числа нажатий
    * @param code
    */
   selectItem(code) {
@@ -79,6 +79,7 @@ class Store {
       list: this.state.list.map((item) => {
         if (item.code === code) {
           item.selected = !item.selected
+          item.count > 0 ? item.count++ : item.count = 1
         } else {
           item.selected = false
         }
