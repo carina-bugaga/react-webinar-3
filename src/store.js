@@ -39,6 +39,13 @@ class Store {
   }
 
   /**
+   * Генератор уникальных чисел
+   */
+  generateNumber() {
+    return Math.random().toString(36).substring(2, 6)
+  }
+
+  /**
    * Добавление новой записи
    */
   addItem() {
@@ -46,7 +53,7 @@ class Store {
       ...this.state,
       list: [
         ...this.state.list,
-        { code: this.state.list.length + 1, title: 'Новая запись' },
+        { code: this.generateNumber(), title: 'Новая запись' },
       ],
     })
   }
