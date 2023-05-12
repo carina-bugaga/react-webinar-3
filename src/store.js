@@ -5,6 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState
     this.listeners = [] // Слушатели изменений состояния
+    this.nextCode = this.state.list.length
   }
 
   /**
@@ -39,13 +40,6 @@ class Store {
   }
 
   /**
-   * Генератор уникальных чисел
-   */
-  generateNumber() {
-    return Math.random().toString(36).substring(2, 6)
-  }
-
-  /**
    * Добавление новой записи
    */
   addItem() {
@@ -53,7 +47,7 @@ class Store {
       ...this.state,
       list: [
         ...this.state.list,
-        { code: this.generateNumber(), title: 'Новая запись' },
+        { code: ++this.nextCode, title: 'Новая запись' },
       ],
     })
   }
