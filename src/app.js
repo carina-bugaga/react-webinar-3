@@ -1,5 +1,5 @@
 import React from 'react';
-import { createElement, declensionNumberOfTimes } from './utils.js';
+import {createElement, pluralize} from './utils.js';
 import './styles.css';
 
 /**
@@ -30,13 +30,11 @@ function App({store}) {
                 <div className="Item-title">
                   {item.title}{' '}
                   {item.count > 0
-                    ? ` | Выделяли ${item.count} ${declensionNumberOfTimes(
-                        item.count
-                      )}`
+                    ? ` | Выделяли ${item.count} ${pluralize(item.count, 'раз', ['', 'а', ''])}`
                     : ''}
                 </div>
                 <div className="Item-actions">
-                  <button onClick={() => store.deleteItem(item.code)}>
+                  <button onClick={(event) => store.deleteItem(event,item.code)}>
                     Удалить
                   </button>
                 </div>
