@@ -3,3 +3,107 @@
   justify-content: flex-end;
   padding: 20px;
 }
+
+.Controls-basket {
+  margin-right: 15px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.Controls-basket-quantity {
+  margin-right: 20px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
+}
+
+.Controls-actions {
+  width: 80px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  text-align: center;
+}
+
+.Modal {
+  background: rgba(0, 0, 0, 0.7);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Modal-content {
+  background-color: white;
+  width: 960px;
+  border-radius: 10px;
+}
+
+.Modal-head {
+  height: 80px;
+  background: #F5F5F5;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Modal-head h1 {
+  margin: 0;
+  padding: 37px 0 6px 29px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 37px;
+}
+
+.Modal-actions {
+  margin: 32px 32px 27px 0;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  text-align: center;
+  color: #000000;
+}
+
+.Modal-footer {
+  display: flex;
+  justify-content: start;
+  height: 130px;
+}
+
+.Modal-footer-total {
+  margin: 20px 0 0 690px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: right;
+  color: #000000;
+}
+
+.Modal-footer-sum {
+  padding: 20px 0 0 53px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: right;
+  color: #000000;
+}
