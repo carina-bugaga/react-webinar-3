@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useCallback} from 'react';
 import List from "./components/list";
 import Controls from "./components/controls";
+import Item from './components/item';
 import Head from "./components/head";
+import Modal from './components/modal';
 import PageLayout from "./components/page-layout";
 import useModal from './useModal'
 
@@ -13,52 +15,37 @@ import useModal from './useModal'
 function App({store}) {
 
   const [isShowingModal, toggleModal] = useModal();
-  const [products, setProducts] = useState([]);
-  const [price, setPrice] = useState(0);
   const list = store.getState().list;
+  const products = store.getState().products;
 
-  // Добавление товаров в корзину
-  function addProduct(product) {
-    const productInBasket = products.some((item) => item.title === product.title);
+  const callbacks = {
+    onAddProduct: useCallback((code) =>{
+      store.addProduct(code);
+    }, [store]),
 
-    if (productInBasket) {
-      const basket = products.map((item) => {
-        if (item.title == product.title) {
-          return { ...item, count: item.count + 1 };
-        }
-        return item;
-      });
-      setProducts(basket);
-      setPrice(price + product.price);
-    } else {
-      setProducts([...products, { ...product, count: 1 }]);
-      setPrice(price + product.price);
-    }
-  }  
+    onRemoveProduct: useCallback((code) =>{
+      store.removeProduct(code);
+    }, [store]),
 
-  // Удаление товаров из корзины
-  function removeProduct(product) {
-    setProducts(products.filter((item) => item.code != product.code));
-    products.forEach((item) => {
-      if (item.title == product.title) {
-        setPrice(price - product.price * item.count);
-      }
-    });
+    onRenderItem: useCallback((item) => {
+      return (
+        <Item item={item} onAddProduct={callbacks.onAddProduct}/>
+      )
+    })
   }
 
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <Controls 
-        show={isShowingModal} 
-        onCloseButtonClick={toggleModal}
-        products={products} 
-        removeProduct={removeProduct}
-        price={price}/>
-      <List 
-        list={list} 
-        products={products} 
-        addProduct={addProduct}/>
+      <Controls products={products} isShowingModal={toggleModal}/>
+      <List list={list} onRenderItem={callbacks.onRenderItem}/>
+        {isShowingModal ? 
+          <Modal 
+            onCloseButtonClick={toggleModal}
+            products={products.list} 
+            price={products.totalPrice}
+            onRemoveProduct={callbacks.onRemoveProduct}/>
+        : ''}
     </PageLayout>
   );
 }

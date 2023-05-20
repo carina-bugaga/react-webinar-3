@@ -5,7 +5,7 @@ import {generateCode} from "./utils";
  */
 class Store {
   constructor(initState = {}) {
-    this.state = initState;
+    this.state = {...initState, products: {list: [], totalPrice: 0}};
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -83,6 +83,44 @@ class Store {
       })
     })
   }
+
+  /**
+   * Добавление товаров в корзину
+   * @param listItem
+   */
+  addProduct(listItem) {
+    const newBasketState = {};
+    const products = this.state.products;
+    const itemToAdd = this.state.list.find((item) => item.code == listItem.code);
+    const isProductAlreadyInBasket = products.list.some((item) => item.code == listItem.code);
+
+    if (isProductAlreadyInBasket) {
+      newBasketState.list = products.list.map((item) => {
+        if (item.code == listItem.code) {
+          return { ...item, count: item.count + 1 };
+        }
+        return item;
+      });
+    } else {
+      newBasketState.list = [...products.list, { ...itemToAdd, count: 1 }];
+    }
+
+    newBasketState.totalPrice = products.totalPrice + itemToAdd.price;
+    this.setState({ ...this.state, products: newBasketState });
+  }  
+
+   /**
+   * Удаление товаров из корзины
+   * @param listItem
+   */
+  removeProduct(listItem) {
+    const newBasketState = {};
+    const products = this.state.products;   
+    const productInBasket = products.list.find((item) => item.code == listItem.code);
+    newBasketState.list = [...products.list.filter((item) => item.code != listItem.code)];
+    newBasketState.totalPrice = products.totalPrice - productInBasket.price * productInBasket.count;
+    this.setState({...this.state, products: newBasketState});
+  } 
 }
 
 export default Store;
