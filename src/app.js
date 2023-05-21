@@ -1,10 +1,12 @@
 import React, {useCallback} from 'react';
-import List from "./components/list";
 import Controls from "./components/controls";
 import Item from './components/item';
+import Footer from './components/footer';
 import Head from "./components/head";
+import List from "./components/list";
 import Modal from './components/modal';
 import PageLayout from "./components/page-layout";
+import Product from './components/product';
 import useModal from './useModal'
 
 /**
@@ -31,6 +33,12 @@ function App({store}) {
       return (
         <Item item={item} onAddProduct={callbacks.onAddProduct}/>
       )
+    }),
+
+    onRenderProduct: useCallback((products) => {
+      return (
+        <Product product={products} onRemoveProduct={callbacks.onRemoveProduct}/>
+      )
     })
   }
 
@@ -40,11 +48,10 @@ function App({store}) {
       <Controls products={products} isShowingModal={toggleModal}/>
       <List list={list} onRenderItem={callbacks.onRenderItem}/>
         {isShowingModal ? 
-          <Modal 
-            onCloseButtonClick={toggleModal}
-            products={products.list} 
-            price={products.totalPrice}
-            onRemoveProduct={callbacks.onRemoveProduct}/>
+          <Modal title='Корзина' onCloseButtonClick={toggleModal}>
+            <List list={products.list} onRenderItem={callbacks.onRenderProduct}/>
+            <Footer totalPrice={products.totalPrice}/>
+          </Modal>
         : ''}
     </PageLayout>
   );

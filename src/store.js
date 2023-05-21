@@ -105,7 +105,7 @@ class Store {
       newBasketState.list = [...products.list, { ...itemToAdd, count: 1 }];
     }
 
-    newBasketState.totalPrice = products.totalPrice + itemToAdd.price;
+    newBasketState.totalPrice = products.list.reduce((acc, item) => acc + item.price * item.count, 0) + itemToAdd.price;
     this.setState({ ...this.state, products: newBasketState });
   }  
 

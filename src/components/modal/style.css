@@ -26,7 +26,7 @@
 
 .Modal-head h1 {
   margin: 0;
-  padding: 37px 0 6px 29px;
+  padding: 20px 0 23px 20px;
   font-family: 'Arial';
   font-style: normal;
   font-weight: 700;
@@ -42,33 +42,5 @@
   font-size: 13px;
   line-height: 15px;
   text-align: center;
-  color: #000000;
-}
-
-.Modal-footer {
-  display: flex;
-  justify-content: start;
-  height: 130px;
-}
-
-.Modal-footer-total {
-  margin: 20px 0 0 690px;
-  font-family: 'Arial';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 21px;
-  text-align: right;
-  color: #000000;
-}
-
-.Modal-footer-sum {
-  padding: 20px 0 0 53px;
-  font-family: 'Arial';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 21px;
-  text-align: right;
   color: #000000;
 }

@@ -1,0 +1,30 @@
+.Footer {
+  display: flex;
+  justify-content: start;
+  height: 130px;
+  background-color: white;
+  width: 960px;
+  border-radius: 10px;
+}
+
+.Footer-total {
+  margin: 20px 0 0 690px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: right;
+  color: #000000;
+}
+
+.Footer-sum {
+  padding: 20px 0 0 53px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: right;
+  color: #000000;
+}
