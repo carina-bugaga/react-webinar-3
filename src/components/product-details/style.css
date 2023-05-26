@@ -1,0 +1,17 @@
+.Product {
+  margin: 21px 41px 0 40px;
+}
+
+.Product-text {
+  margin-bottom: 20px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
+}
+
+.Product button{
+  min-width: 72px;
+}

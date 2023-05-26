@@ -1,16 +1,33 @@
 /* Контрол с общими действиями */
 .BasketTool{
   display: flex;
-  justify-content: flex-end;
   padding: 20px;
   font-size: 18px;
-}
-
-.BasketTool-label{
-
+  white-space: nowrap;
 }
 
 .BasketTool-total{
   font-weight: bold;
   margin: 0 20px;
+}
+
+.BasketTool-link {
+  flex: 1;
+  white-space: nowrap;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  text-decoration-line: underline;
+}
+
+.BasketTool-link a{
+  color: #0087E9;
+}
+
+.BasketTool-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }

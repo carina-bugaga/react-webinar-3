@@ -1,0 +1,28 @@
+.Pagination {
+  display: flex;
+  justify-content: flex-end;
+  transition: background-color 1s;
+  padding-right: 21px;
+}
+
+.Pagination-item {
+  padding: 1px 2px;
+  min-width: 18px;
+  list-style: none;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.Pagination-item_dots, .Pagination-item_active:hover {
+  color: #CCCCCC;
+}
+
+.Pagination-item_active {
+  color: #FFFFFF;
+  background: #0087E9;
+}
