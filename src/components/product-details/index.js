@@ -3,6 +3,7 @@ import {cn as bem} from '@bem-react/classname';
 import { numberFormat } from '../../utils';
 import PropTypes from "prop-types";
 import './style.css';
+import useTranslation from "../../store/use-translate";
 
 function ProductDatails({product, addToBasket}){
 
@@ -16,11 +17,11 @@ function ProductDatails({product, addToBasket}){
     <div className={cn()}>
       <div className={cn('text')}>
         <p>{product.description}</p>
-        <p>Страна производитель: <b>{product.madeIn?.title} ({product.madeIn?.code})</b></p>
-        <p>Категория: <b>{product.category?.title}</b></p>
-        <p>Год выпуска: <b>{product.edition}</b></p>
-        <h2>Цена: {numberFormat(product.price)} ₽</h2>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <p>{useTranslation('country')}: <b>{product.madeIn?.title} ({product.madeIn?.code})</b></p>
+        <p>{useTranslation('category')}: <b>{product.category?.title}</b></p>
+        <p>{useTranslation('year')}: <b>{product.edition}</b></p>
+        <h2>{useTranslation('price')}: {numberFormat(product.price)} ₽</h2>
+        <button onClick={callbacks.onAdd}>{useTranslation('add')}</button>
       </div>
     </div>
   )};

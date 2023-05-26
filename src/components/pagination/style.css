@@ -18,8 +18,12 @@
   cursor: pointer;
 }
 
-.Pagination-item_dots, .Pagination-item_active:hover {
+.Pagination-item_dots {
   color: #CCCCCC;
+}
+
+.Pagination-item:hover {
+  background: #E1E1E1;
 }
 
 .Pagination-item_active {

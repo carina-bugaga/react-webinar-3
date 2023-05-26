@@ -31,7 +31,7 @@ function Product() {
 
   return (
     <PageLayout>
-      <Head title='Название товара'/>
+      <Head title={select.product.title}/>
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                   sum={select.sum}/>
       <ProductDetails product={select.product} addToBasket={callbacks.addToBasket}/>
