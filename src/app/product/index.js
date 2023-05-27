@@ -20,6 +20,7 @@ function Product() {
     product: state.catalog.product,
     amount: state.basket.amount,
     sum: state.basket.sum,
+    lang: state.lang.lang,
   }));
 
   const callbacks = {
@@ -27,11 +28,13 @@ function Product() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    // Переключение языка
+    toggleLanguage: useCallback((lang) => store.actions.lang.loadLanguage(lang), [store]),
   }
 
   return (
     <PageLayout>
-      <Head title={select.product.title}/>
+      <Head title={select.product.title} toggleLanguage={callbacks.toggleLanguage}/>
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                   sum={select.sum}/>
       <ProductDetails product={select.product} addToBasket={callbacks.addToBasket}/>
