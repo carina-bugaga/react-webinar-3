@@ -1,13 +1,21 @@
-import {memo} from "react";
+import {memo, useEffect} from "react";
 import {cn as bem} from '@bem-react/classname';
 import { numberFormat } from '../../utils';
 import PropTypes from "prop-types";
 import './style.css';
 import useTranslation from "../../store/use-translate";
+import { useLocation } from 'react-router-dom';
+import useStore from "../../store/use-store";
 
-function ProductDatails({product, addToBasket}){
+function ProductDetails({product, addToBasket}){
 
-  const cn = bem('Product');
+  const cn = bem('Product');  
+  const store = useStore();
+  const location = useLocation();
+
+  useEffect(() => {
+    store.actions.catalog.searchById(location.pathname.slice(8));
+  }, [location]);
 
   const callbacks = {
     onAdd: (e) => addToBasket(product._id),
@@ -27,7 +35,7 @@ function ProductDatails({product, addToBasket}){
   )};
 
 
-ProductDatails.propTypes = {
+ProductDetails.propTypes = {
   product: PropTypes.shape({
     description: PropTypes.string,
     madeIn: PropTypes.shape({ 
@@ -41,8 +49,8 @@ ProductDatails.propTypes = {
   addToBasket: PropTypes.func,
 }; 
 
-ProductDatails.defaultProps = {
+ProductDetails.defaultProps = {
   onAdd: () => {},
 }
 
-export default memo(ProductDatails);
+export default memo(ProductDetails);

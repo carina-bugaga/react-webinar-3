@@ -26,7 +26,7 @@ function BasketTool({sum, amount, onOpen, lang}) {
     <div className={cn()}>
       <div className={cn('link')}><Link to="/">{useTranslation('main')}</Link></div>
       <div className={cn('right')}>
-        <span className={cn('label')}>{useTranslation('inBasket')}</span>
+        <span className={cn('label')}>{useTranslation('inBasket')}:</span>
         <span className={cn('total')}>
           {translateAmount(amount)}
         </span>
