@@ -8,6 +8,7 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from '../../components/pagination';
 import useTranslation from '../../store/use-translate';
+import Loading from '../../components/loading';
 
 function Main() {
 
@@ -24,6 +25,7 @@ function Main() {
     currentPage: state.catalog.currentPage,
     count: state.catalog.count,
     lang: state.lang.lang,
+    loading: state.catalog.loading,
   }));
 
   const callbacks = {
@@ -48,8 +50,14 @@ function Main() {
       <Head title={useTranslation('shop')} toggleLanguage={callbacks.toggleLanguage}/>
       <Bar onOpen={callbacks.openModalBasket} amount={select.amount}
                     sum={select.sum} lang={select.lang}/>
-      <List list={select.list} renderItem={renders.item}/>
-      <Pagination currentPage={select.currentPage} count={select.count} changeList={callbacks.changeList}/>
+      {select.loading ? (
+        <Loading />
+      ) : (
+        <>
+          <List list={select.list} renderItem={renders.item}/>
+          <Pagination currentPage={select.currentPage} count={select.count} changeList={callbacks.changeList}/>
+        </>
+      )}
     </PageLayout>
 
   );

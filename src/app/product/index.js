@@ -3,24 +3,27 @@ import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import ProductDetails from '../../components/product-details';
 import Bar from '../../components/bar';
+import Loading from '../../components/loading';
 
 function Product() {
 
   const store = useStore();
   const {id} = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     store.actions.catalog.searchById(id);
-  }, []);
+  }, [location]);
 
   const select = useSelector(state => ({
     product: state.catalog.product,
     amount: state.basket.amount,
     sum: state.basket.sum,
     lang: state.lang.lang,
+    loading: state.catalog.loading,
   }));
 
   const callbacks = {
@@ -37,7 +40,11 @@ function Product() {
       <Head title={select.product.title} toggleLanguage={callbacks.toggleLanguage}/>
       <Bar onOpen={callbacks.openModalBasket} amount={select.amount}
                     sum={select.sum} lang={select.lang}/>
-      <ProductDetails product={select.product} addToBasket={callbacks.addToBasket}/>
+      {select.loading ? (
+        <Loading />
+      ) : (
+        <ProductDetails product={select.product} addToBasket={callbacks.addToBasket}/>
+      )}
     </PageLayout>
   );
 }
