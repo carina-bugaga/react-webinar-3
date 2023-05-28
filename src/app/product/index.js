@@ -36,7 +36,7 @@ function Product() {
     <PageLayout>
       <Head title={select.product.title} toggleLanguage={callbacks.toggleLanguage}/>
       <Bar onOpen={callbacks.openModalBasket} amount={select.amount}
-                    sum={select.sum}/>
+                    sum={select.sum} lang={select.lang}/>
       <ProductDetails product={select.product} addToBasket={callbacks.addToBasket}/>
     </PageLayout>
   );
