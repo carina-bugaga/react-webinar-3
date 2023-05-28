@@ -1,11 +1,11 @@
 import {memo, useCallback, useEffect} from 'react';
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
-import BasketTool from "../../components/basket-tool";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import { useParams } from 'react-router-dom';
 import ProductDetails from '../../components/product-details';
+import Bar from '../../components/bar';
 
 function Product() {
 
@@ -35,8 +35,8 @@ function Product() {
   return (
     <PageLayout>
       <Head title={select.product.title} toggleLanguage={callbacks.toggleLanguage}/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
+      <Bar onOpen={callbacks.openModalBasket} amount={select.amount}
+                    sum={select.sum}/>
       <ProductDetails product={select.product} addToBasket={callbacks.addToBasket}/>
     </PageLayout>
   );
