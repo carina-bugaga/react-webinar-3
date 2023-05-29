@@ -7,6 +7,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import ProductDetails from '../../components/product-details';
 import Bar from '../../components/bar';
 import Loading from '../../components/loading';
+import { addressURL } from '../../components/properties';
 
 function Product() {
 
@@ -38,7 +39,7 @@ function Product() {
   return (
     <PageLayout>
       <Head title={select.product.title} toggleLanguage={callbacks.toggleLanguage}/>
-      <Bar onOpen={callbacks.openModalBasket} amount={select.amount}
+      <Bar address={addressURL.Main} onOpen={callbacks.openModalBasket} amount={select.amount}
                     sum={select.sum} lang={select.lang}/>
       {select.loading ? (
         <Loading />

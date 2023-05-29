@@ -6,6 +6,7 @@ import BasketTotal from "../../components/basket-total";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import useTranslation from '../../store/use-translate';
+import { addressURL } from '../../components/properties';
 
 function Basket() {
 
@@ -26,7 +27,7 @@ function Basket() {
 
   const renders = {
     itemBasket: useCallback((item) => {
-      return <ItemBasket closeModal={callbacks.closeModal} item={item} onRemove={callbacks.removeFromBasket}/>
+      return <ItemBasket closeModal={callbacks.closeModal} item={item} address={addressURL.Product} onRemove={callbacks.removeFromBasket}/>
     }, [callbacks.removeFromBasket]),
   };
 

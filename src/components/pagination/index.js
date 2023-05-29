@@ -5,7 +5,7 @@ import './style.css';
 import { pagination } from "../../utils";
 import { Link } from "react-router-dom";
 
-function Pagination({currentPage, count, changeList}){
+function Pagination({address, currentPage, count, changeList}){
 
   const cn = bem('Pagination');
   const pages = pagination(currentPage, count);  
@@ -20,7 +20,7 @@ function Pagination({currentPage, count, changeList}){
             <li key={index} 
                 className={number == currentPage ? cn('item', {active: true}): cn('item')} 
                 onClick={() =>changeList(number)}>
-                <Link to={`/page/${number}`}>{number}</Link>
+                <Link to={address.replace(':number', number)}>{number}</Link>
             </li>
         )}
       })}
@@ -29,6 +29,7 @@ function Pagination({currentPage, count, changeList}){
 }
 
 Pagination.propTypes = {
+  address: PropTypes.string,
   currentPage: PropTypes.number,
   count: PropTypes.number,
   changeList: PropTypes.func.isRequired,

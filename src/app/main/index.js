@@ -10,6 +10,7 @@ import Pagination from '../../components/pagination';
 import useTranslation from '../../store/use-translate';
 import Loading from '../../components/loading';
 import { useParams } from 'react-router-dom';
+import { addressURL } from '../../components/properties';
 
 function Main() {
 
@@ -44,7 +45,7 @@ function Main() {
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
+      return <Item item={item} address={addressURL.Product} onAdd={callbacks.addToBasket}/>
     }, [callbacks.addToBasket]),
   };
 
@@ -58,7 +59,7 @@ function Main() {
       ) : (
         <>
           <List list={select.list} renderItem={renders.item}/>
-          <Pagination currentPage={select.currentPage} count={select.count} changeList={callbacks.changeList}/>
+          <Pagination address={addressURL.Page} currentPage={select.currentPage} count={select.count} changeList={callbacks.changeList}/>
         </>
       )}
     </PageLayout>
