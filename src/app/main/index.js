@@ -9,13 +9,16 @@ import useSelector from "../../store/use-selector";
 import Pagination from '../../components/pagination';
 import useTranslation from '../../store/use-translate';
 import Loading from '../../components/loading';
+import { useParams } from 'react-router-dom';
 
 function Main() {
 
   const store = useStore();
+  let {number} = useParams();
 
   useEffect(() => {
-    store.actions.catalog.load();
+    number = number == undefined ? 1 : Number(number) 
+    store.actions.catalog.load(number);
   }, []);
 
   const select = useSelector(state => ({

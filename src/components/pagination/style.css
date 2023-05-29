@@ -15,7 +15,11 @@
   font-size: 16px;
   line-height: 18px;
   text-align: center;
-  cursor: pointer;
+}
+
+.Pagination-item a{
+  color: #000000;
+  text-decoration: none;
 }
 
 .Pagination-item_dots {
@@ -27,6 +31,9 @@
 }
 
 .Pagination-item_active {
-  color: #FFFFFF;
   background: #0087E9;
+}
+
+.Pagination-item_active a{
+  color: #FFFFFF;
 }

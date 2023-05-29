@@ -18,7 +18,7 @@ function Item(props){
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('title')}>
-        <Link to={`product/${props.item._id}`} onClick={props.handleCloseModal} className={cn('link')}>
+        <Link to={`/product/${props.item._id}`} onClick={props.handleCloseModal} className={cn('link')}>
           {props.item.title}
         </Link>
       </div>

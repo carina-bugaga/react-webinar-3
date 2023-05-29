@@ -3,6 +3,7 @@ import {cn as bem} from '@bem-react/classname';
 import PropTypes from "prop-types";
 import './style.css';
 import { pagination } from "../../utils";
+import { Link } from "react-router-dom";
 
 function Pagination({currentPage, count, changeList}){
 
@@ -19,7 +20,7 @@ function Pagination({currentPage, count, changeList}){
             <li key={index} 
                 className={number == currentPage ? cn('item', {active: true}): cn('item')} 
                 onClick={() =>changeList(number)}>
-                {number}
+                <Link to={`/page/${number}`}>{number}</Link>
             </li>
         )}
       })}
