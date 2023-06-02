@@ -3,6 +3,10 @@
   padding: 2px;
 }
 
+.Input_theme_small{
+  width: 203px;
+}
+
 .Input_theme_big{
   width: 300px;
 }

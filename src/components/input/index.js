@@ -42,7 +42,7 @@ Input.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
-  theme: PropTypes.string,
+  theme: PropTypes.oneOf(['small', 'big']),
 }
 
 Input.defaultProps = {
