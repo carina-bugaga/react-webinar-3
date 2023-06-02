@@ -22,7 +22,7 @@ function SignIn() {
     if(!select.isLoggedIn && localStorage.getItem('token')) {
       store.actions.user.loginByToken();
     }
-  }, [select.isLoggedIn]);
+  }, []);
 
   const callbacks ={
     // Выход пользователя

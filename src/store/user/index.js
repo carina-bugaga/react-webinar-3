@@ -106,8 +106,13 @@ class UserState extends StoreModule {
    */
   async logout() {
     // Установка признака ожидания загрузки
+    localStorage.removeItem('token')
     this.setState({
-      waiting: true
+      waiting: true,
+      userName: '',
+      phone: '',
+      email: '',
+      isLoggedIn: false,
     })
 
     try {
@@ -121,13 +126,8 @@ class UserState extends StoreModule {
         }
       );
     } finally {
-      localStorage.removeItem('token');
       this.setState({
-        userName: '',
-        phone: '',
-        email: '',
-        waiting: false,
-        isLoggedIn: false,
+        waiting: false
       });
     }
   }

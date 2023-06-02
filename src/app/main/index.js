@@ -17,7 +17,7 @@ function Main() {
   useInit(() => {
     store.actions.catalog.initParams();
     store.actions.category.loadCategoties();
-  }, [], true);
+  }, [store], true);
 
   const {t} = useTranslate();
 
