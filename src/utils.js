@@ -68,7 +68,7 @@ export function traverse(object, pref = '', res = []) {
     
     if (i.children !== undefined) {
       // если есть children идем вглубь и добавляем префикс
-      prefix += '-';
+      prefix += '- ';
       traverse(i.children, prefix, result);
     } else {
       // если нет сокращаем префикс

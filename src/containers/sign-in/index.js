@@ -38,7 +38,7 @@ function SignIn() {
   const {t} = useTranslate();
 
   return (
-    <SideLayout side='end'>
+    <SideLayout side='end' border='bottom'>
         <LoginTool btnIn={t('sign.in')} 
                    btnOut={t('sign.out')} 
                    logout={callbacks.logout}

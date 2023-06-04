@@ -36,7 +36,7 @@ class CatalogState extends StoreModule {
     if (urlParams.has('page')) validParams.page = Number(urlParams.get('page')) || 1;
     if (urlParams.has('limit')) validParams.limit = Math.min(Number(urlParams.get('limit')) || 10, 50);
     if (urlParams.has('sort')) validParams.sort = urlParams.get('sort');
-    if (urlParams.has('category')) validParams.sort = urlParams.get('category');
+    if (urlParams.has('category')) validParams.category = urlParams.get('category');
     if (urlParams.has('query')) validParams.query = urlParams.get('query');
     await this.setParams({...this.initState().params, ...validParams, ...newParams}, true);
   }

@@ -33,23 +33,26 @@ class UserState extends StoreModule {
         throw new Error('Введите пароль');
       }
    
-      await fetch('/api/v1/users/sign',
+      const response = await fetch('/api/v1/users/sign',
         {
           method: 'POST',
           headers: {'Content-Type': 'application/json',},
           body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => { 
-          localStorage.setItem('token', data.result.token);
-          this.setState({
-            userName: data.result.user.profile.name,
-            phone: data.result.user.profile.phone,
-            email: data.result.user.email,
-            waiting: false,
-            isLoggedIn: true,
-          }, 'Пользователь авторизован');
-        })
+        });
+
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(body.error.data.issues[0].message);
+      } else {
+        localStorage.setItem('token', body.result.token);
+        this.setState({
+          userName: body.result.user.profile.name,
+          phone: body.result.user.profile.phone,
+          email: body.result.user.email,
+          waiting: false,
+          isLoggedIn: true,
+        }, 'Пользователь авторизован');
+      }
       
     } catch (error) {
       // Ошибка при загрузке
@@ -127,6 +130,7 @@ class UserState extends StoreModule {
       );
     } finally {
       this.setState({
+        ...this.getState(),
         waiting: false
       });
     }
