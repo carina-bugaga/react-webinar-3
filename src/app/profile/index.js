@@ -1,4 +1,6 @@
 import {memo, useEffect} from 'react';
+import useStore from "../../hooks/use-store";
+import useInit from "../../hooks/use-init";
 import useSelector from "../../hooks/use-selector";
 import useTranslate from "../../hooks/use-translate";
 import PageLayout from "../../components/page-layout";
@@ -11,13 +13,18 @@ import ProfileForm from '../../components/profile-form';
 import { useNavigate } from 'react-router-dom';
 
 function Profile() {
+  const store = useStore();
   const navigate = useNavigate();
 
+  useInit(() => {
+    store.actions.profile.getProfileData();
+  }, []);
+
   const select = useSelector(state => ({ 
-      userName: state.user.userName,
-      phone: state.user.phone,
-      email: state.user.email,
-      waiting: state.user.waiting,
+      userName: state.profile.userName,
+      phone: state.profile.phone,
+      email: state.profile.email,
+      waiting: state.profile.waiting,
       isLoggedIn: state.user.isLoggedIn,
     }));
 

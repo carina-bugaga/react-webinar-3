@@ -8,8 +8,6 @@ class UserState extends StoreModule {
   initState() {
     return {
       userName: '',
-      phone: '',
-      email: '',
       error: '',
       waiting: false,
       isLoggedIn: false
@@ -47,8 +45,6 @@ class UserState extends StoreModule {
         localStorage.setItem('token', body.result.token);
         this.setState({
           userName: body.result.user.profile.name,
-          phone: body.result.user.profile.phone,
-          email: body.result.user.email,
           waiting: false,
           isLoggedIn: true,
         }, 'Пользователь авторизован');
@@ -84,8 +80,6 @@ class UserState extends StoreModule {
       .then(data => {
         this.setState({
           userName: data.result.profile.name,
-          phone: data.result.profile.phone,
-          email: data.result.email,
           waiting: false,
           isLoggedIn: true,
       }, 'Авторизация по токену');
@@ -95,8 +89,6 @@ class UserState extends StoreModule {
       // Ошибка при загрузке
       this.setState({
         userName: '',
-        phone: '',
-        email: '',
         error: error.message,
         isLoggedIn: false,
         waiting: false
@@ -113,8 +105,6 @@ class UserState extends StoreModule {
     this.setState({
       waiting: true,
       userName: '',
-      phone: '',
-      email: '',
       isLoggedIn: false,
     })
 
