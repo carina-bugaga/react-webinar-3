@@ -13,6 +13,7 @@ function ProfileForm({user, phone, email}){
 
   return (
     <div className={cn()}>
+      <h2>{t('profile')}</h2>
       <div className={cn('line')}>
         <div className={cn('field')}>{t('user.name')}: </div>
         <div className={cn('bold')}>{user}</div>

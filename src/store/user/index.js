@@ -125,6 +125,13 @@ class UserState extends StoreModule {
       });
     }
   }
+
+  dropError() {
+    this.setState({
+      ...this.getState(),
+      error: '',
+    }, 'Обнуление текста ошибки');
+  }
 }
 
 export default UserState;

@@ -10,11 +10,11 @@ import LocaleSelect from "../../containers/locale-select";
 import SignIn from '../../containers/sign-in';
 import Spinner from "../../components/spinner";
 import ProfileForm from '../../components/profile-form';
-import { useNavigate } from 'react-router-dom';
+import useProfileSession from '../../hooks/use-profile-session';
 
 function Profile() {
   const store = useStore();
-  const navigate = useNavigate();
+  useProfileSession();
 
   useInit(() => {
     store.actions.profile.getProfileData();
@@ -25,21 +25,14 @@ function Profile() {
       phone: state.profile.phone,
       email: state.profile.email,
       waiting: state.profile.waiting,
-      isLoggedIn: state.user.isLoggedIn,
     }));
-
-  useEffect(() => {
-    if(!select.isLoggedIn && !localStorage.getItem('token')) {
-      navigate('/login');
-    }
-  }, [select.isLoggedIn]); 
 
   const {t} = useTranslate();
 
   return (
     <PageLayout>
       <SignIn/>
-      <Head title={t('profile')}>
+      <Head title={t('title')}>
         <LocaleSelect/>
       </Head>
       <Navigation/>

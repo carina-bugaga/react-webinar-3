@@ -11,11 +11,16 @@ import SideLayout from '../../components/side-layout';
 import Spinner from "../../components/spinner";
 import LoginForm from '../../components/login-form';
 import { useNavigate } from 'react-router-dom';
+import useInit from '../../hooks/use-init';
 
 function Login() {
 
   const store = useStore();
   const navigate = useNavigate();
+  
+  useInit(() => {
+    store.actions.user.dropError();
+  }, [], true);
 
   const select = useSelector((state) => ({
     error: state.user.error,
