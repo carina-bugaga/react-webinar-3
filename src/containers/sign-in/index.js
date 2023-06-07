@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useTranslate from "../../hooks/use-translate";
 import SideLayout from "../../components/side-layout";
 import LoginTool from "../../components/login-tool";
+import useProfileByToken from "../../hooks/use-profile-by-token";
 
 
 function SignIn() {
@@ -18,11 +19,7 @@ function SignIn() {
     isLoggedIn: state.user.isLoggedIn,
   }));
 
-  useEffect(() => {
-    if(!select.isLoggedIn && localStorage.getItem('token')) {
-      store.actions.user.loginByToken();
-    }
-  }, []);
+  useProfileByToken();
 
   const callbacks ={
     // Выход пользователя

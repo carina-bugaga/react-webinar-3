@@ -11,7 +11,7 @@ export default function useProfileSession() {
   const isLoggedIn = useSelector(state => state.user.isLoggedIn);
   
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn && !localStorage.getItem('token')) {
       navigate('/login');
     }
   }, [isLoggedIn, navigate]);
