@@ -1,0 +1,53 @@
+.CommentList {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+
+.CommentList-title {
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.CommentList-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.CommentList-subtitle{
+  margin-top: 30px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.CommentList-text{
+  margin: 10px 0;
+  height: 76px;
+  width: 100%;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+  resize: none;
+  border: 1px solid #666666;
+  box-shadow: inset 0px 1px 4px rgba(102, 102, 102, 0.1);
+}
+
+.CommentList-btn {
+  margin-right: 10px;
+  width: 90px;
+  height: 21px;
+}
+
+.CommentList-login a {
+  color: #0087E9;
+}
