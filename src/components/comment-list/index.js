@@ -27,7 +27,7 @@ function CommentList({addComment, comments, count, exists, idArticle, idUser}) {
             <>
               <div className={cn('subtitle')}>Новый комментарий</div>
               <textarea className={cn('text')} type='text' value={text} onChange={(e) => setText(e.target.value)}/>
-              <button className={cn('btn')} onClick={() => submit({_id: idArticle, _type: 'article'})}>
+              <button className={cn('btn')} onClick={() => {if(text.trim() !== '') submit({_id: idArticle, _type: 'article'})}}>
                 Отправить
               </button>
             </>

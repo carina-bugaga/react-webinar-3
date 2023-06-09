@@ -6,6 +6,15 @@
   display: flex;
 }
 
+.CommentCard-wrapper-child {
+  margin-left: 30px;
+}
+
+.CommentCard-wrapper-child-login {
+  display: flex;
+  margin-left: 30px;
+}
+
 .CommentCard-user {
   margin-right: 10px;
   font-family: 'Arial';
@@ -43,6 +52,7 @@
   font-size: 14px;
   line-height: 16px;
   color: #000000;
+  word-wrap: break-word;
 }
 
 .CommentCard-btn-answer {
@@ -73,6 +83,15 @@
   background-color: white;
 }
 
+.CommentCard-subtitle{
+  margin-top: 30px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+}
+
 .CommentCard-textarea{
   margin: 10px 0;
   height: 76px;
@@ -86,6 +105,7 @@
   resize: none;
   border: 1px solid #666666;
   box-shadow: inset 0px 1px 4px rgba(102, 102, 102, 0.1);
+  white-space: pre-wrap;
   }
   
 .CommentCard-btn {

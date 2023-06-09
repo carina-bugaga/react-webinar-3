@@ -16,7 +16,7 @@ import shallowequal from "shallowequal";
 import articleActions from '../../store-redux/article/actions';
 import commentsActions from '../../store-redux/comments/actions';
 import CommentList from '../../components/comment-list';
-import buildCommentTree from '../../utils/build-comment-tree';
+import listToTree from '../../utils/list-to-tree';
 
 function Article() {
   const store = useStore();
@@ -55,7 +55,7 @@ function Article() {
       <Spinner active={select.waiting}>
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t}/>
         <Spinner active={select.waitingComment}>
-        {select.comments.items && <CommentList addComment={callbacks.addComment} comments={buildCommentTree(select.comments.items)} count={select.count} 
+        {select.comments.items && <CommentList addComment={callbacks.addComment} comments={listToTree(select.comments.items)} count={select.count} 
                        exists={exists} idArticle={params.id} idUser={user._id}/>}
         </Spinner>
       </Spinner>

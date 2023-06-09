@@ -9,10 +9,13 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
   const cn = bem('CommentCard');
   const [text, setText] = useState('');
   const submit = (id) => {
-    addComment(text, {_id: id, _type:'comment'});
-    setNewComment('');
+    const success = addComment(text, {_id: id, _type:'comment'});
+    if (success) {
+      setNewComment('');
+    }
   };
   const hasChildren = comment.children.length > 0;
+  const limitChildren = comment.parent._tree.length < 8;
 
   return (
     <div className={cn()}>
@@ -32,23 +35,24 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
           Ответить
         </button> : <>{
         exists ?
-          <>
+          <div className={cn('wrapper-child')}>
+            <div className={cn('subtitle')}>Новый ответ</div>
             <textarea className={cn('textarea')} type='text' onChange={(e) => setText(e.target.value)}/>
             <div className={cn('btn-wrapper')}>
-              <button className={cn('btn')} onClick={() => submit(comment._id)}>
+              <button className={cn('btn')} onClick={() => {if(text.trim() !== '') submit(comment._id)}}>
                 Отправить
               </button>
               <button className={cn('btn')} onClick={() => setNewComment('')}>
                 Отмена
               </button>
             </div>
-          </>
+          </div>
             : 
           <>
             <button className={cn('btn-answer')} onClick={() => setNewComment(comment._id)}>
               Ответить
             </button>
-            <div className={cn('wrapper')}>
+            <div className={cn('wrapper-child-login')}>
               <div className={cn('login')}>
                 <Link to='/login'>Войдите</Link>, чтобы иметь возможность комментировать. 
               </div>
@@ -61,7 +65,7 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
         </>
         }
       {hasChildren && (
-        <div className={cn('reply')}>
+        <div className={limitChildren ? cn('reply') : ''}>
           {comment.children.map((comment) => (
             <CommentCard
               addComment={addComment}
@@ -73,6 +77,8 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
               setNewComment={setNewComment}
             />
           ))}
+
+          
         </div>
       )}
     </div>
