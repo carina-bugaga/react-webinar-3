@@ -33,8 +33,7 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
         </button> : <>{
         exists ?
           <>
-            <textarea className={cn('textarea')} type='text' placeholder='Текст' 
-                      onChange={(e) => setText(e.target.value)}/>
+            <textarea className={cn('textarea')} type='text' onChange={(e) => setText(e.target.value)}/>
             <div className={cn('btn-wrapper')}>
               <button className={cn('btn')} onClick={() => submit(comment._id)}>
                 Отправить
