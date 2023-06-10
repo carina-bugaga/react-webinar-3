@@ -55,7 +55,7 @@ function Article() {
       <Spinner active={select.waiting}>
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t}/>
         <Spinner active={select.waitingComment}>
-        {select.comments.items && <CommentList addComment={callbacks.addComment} comments={listToTree(select.comments.items)} count={select.count} 
+        {select.comments.items && <CommentList addComment={callbacks.addComment} comments={listToTree(select.comments.items, 'article')} count={select.count} 
                        exists={exists} idArticle={params.id} idUser={user._id}/>}
         </Spinner>
       </Spinner>
