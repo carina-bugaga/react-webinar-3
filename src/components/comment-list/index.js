@@ -5,7 +5,7 @@ import './style.css';
 import { Link } from "react-router-dom";
 import CommentCard from "../comment-card";
 
-function CommentList({addComment, comments, count, exists, idArticle, idUser}) {
+function CommentList({addComment, comments, count, exists, idArticle, idUser, setReply}) {
   const cn = bem('CommentList');
   const [text, setText] = useState('');
   const [newComment, setNewComment] = useState('');
@@ -18,7 +18,8 @@ function CommentList({addComment, comments, count, exists, idArticle, idUser}) {
     <div className={cn()}>
       <div className={cn('title')}>Комментарии ({count})</div>{
         comments.map(item => 
-          <CommentCard addComment={addComment} comment={item} exists={exists} idUser={idUser} key={item._id} newComment={newComment} setNewComment={setNewComment}/>
+          <CommentCard addComment={addComment} comment={item} exists={exists} idUser={idUser} key={item._id} 
+                       newComment={newComment} setNewComment={setNewComment} setReply={setReply}/>
         )
       }
       {newComment === '' ?
@@ -37,7 +38,6 @@ function CommentList({addComment, comments, count, exists, idArticle, idUser}) {
           }
         </div> : ''
       }
-      
     </div>
   );
 }
@@ -48,7 +48,8 @@ CommentList.propTypes = {
   count: PropTypes.number,
   exists: PropTypes.bool,
   idArticle: PropTypes.string,
-  idUSer: PropTypes.string
+  idUSer: PropTypes.string,
+  setReply: PropTypes.func
 };
 
 CommentList.defaultProps = {

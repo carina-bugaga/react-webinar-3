@@ -1,4 +1,4 @@
-import {memo, useCallback} from 'react';
+import {memo, useCallback, useState} from 'react';
 import {useParams} from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
@@ -28,6 +28,7 @@ function Article() {
     dispatch(articleActions.load(params.id));
     dispatch(commentsActions.load(params.id));
   }, [params.id]);
+  const [reply, setReply] = useState(null);
   const user = useSelector(state => state.session.user);
   const exists = useSelector(state => state.session.exists);
   const select = useSelectorRedux(state => ({
@@ -44,6 +45,15 @@ function Article() {
     // Добавление комментария
     addComment: useCallback((text, parent) => dispatch(commentsActions.addComment(text, parent)), [dispatch]),
   }
+  // Удаление промежуточного элемента с ответом
+  if (select.comments.items && reply == 'delete') {
+    select.comments.items = select.comments.items.filter((item)=>item._type !='reply');
+  }
+  // Добавление промежуточного элемента с ответом
+  if (select.comments.items && reply) { 
+    select.comments.items = select.comments.items.filter((item)=>item._type !='reply');
+    select.comments.items.push({_id: null, _type: 'reply', children: [], parent: {_id: reply, _tree: 0}});
+  }
 
   return (
     <PageLayout>
@@ -56,7 +66,7 @@ function Article() {
         <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t}/>
         <Spinner active={select.waitingComment}>
         {select.comments.items && <CommentList addComment={callbacks.addComment} comments={listToTree(select.comments.items, 'article')} count={select.count} 
-                       exists={exists} idArticle={params.id} idUser={user._id}/>}
+                       exists={exists} idArticle={params.id} idUser={user._id} setReply={setReply}/>}
         </Spinner>
       </Spinner>
     </PageLayout>

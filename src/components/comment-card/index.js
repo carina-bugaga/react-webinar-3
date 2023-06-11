@@ -1,12 +1,17 @@
-import {memo, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import './style.css';
 import formatDate from "../../utils/format-date";
 import { Link } from "react-router-dom";
 
-function CommentCard({addComment, comment, exists, idUser, newComment, setNewComment}) {
+function CommentCard({addComment, comment, exists, idUser, newComment, setNewComment, setReply}) {
   const cn = bem('CommentCard');
+  // Scroll к новому ответу
+  useEffect(() => {
+    if (document.getElementById("reply")) {
+      document.getElementById("reply").scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }}, [setReply]);
   const [text, setText] = useState('');
   const submit = (id) => {
     const success = addComment(text, {_id: id, _type:'comment'});
@@ -15,55 +20,59 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
     }
   };
   const hasChildren = comment.children.length > 0;
-  const limitChildren = comment.parent._tree.length < 8;
+  const limitChildren = comment.parent._tree && comment.parent._tree.length < 8;
 
   return (
     <div className={cn()}>
-      <div className={cn('wrapper')}>
-        <div className={idUser !== comment.author._id ? cn('user') : cn('user-active')}>
-          {comment.author.profile.name}
-        </div>
-        <div className={cn('date')}>
-          {formatDate(comment.dateCreate)}
-        </div>
-      </div>
-      <div className={cn('text')}>
-        {comment.text}
-      </div>
-      {newComment !== comment._id ?
-        <button className={cn('btn-answer')} onClick={() => setNewComment(comment._id)}>
-          Ответить
-        </button> : <>{
-        exists ?
+      {comment._type != 'comment' ?
+      <>
+        {exists ?
           <div className={cn('wrapper-child')}>
             <div className={cn('subtitle')}>Новый ответ</div>
             <textarea className={cn('textarea')} type='text' onChange={(e) => setText(e.target.value)}/>
             <div className={cn('btn-wrapper')}>
-              <button className={cn('btn')} onClick={() => {if(text.trim() !== '') submit(comment._id)}}>
+              <button className={cn('btn')}  id="reply" onClick={() => {if(text.trim() !== '') {setReply("delete");
+                submit(comment.parent._id);}}}>
                 Отправить
               </button>
-              <button className={cn('btn')} onClick={() => setNewComment('')}>
+              <button className={cn('btn')} onClick={() => {setNewComment('');
+                setReply("delete");
+            }}>
                 Отмена
               </button>
             </div>
           </div>
-            : 
+          : 
           <>
-            <button className={cn('btn-answer')} onClick={() => setNewComment(comment._id)}>
-              Ответить
-            </button>
             <div className={cn('wrapper-child-login')}>
-              <div className={cn('login')}>
+              <div className={cn('login')} id="reply">
                 <Link to='/login'>Войдите</Link>, чтобы иметь возможность комментировать. 
               </div>
               <button className={cn('btn-cansel')} onClick={() => setNewComment('')}>
                 Отмена
               </button>
             </div>
-            </>
+          </>
           }
-        </>
-        }
+      </> :
+      <>
+        <div className={cn('wrapper')}>
+          <div className={idUser !== comment.author._id ? cn('user') : cn('user-active')}>
+            {comment.author.profile.name}
+          </div>
+          <div className={cn('date')}>
+            {formatDate(comment.dateCreate)}
+          </div>
+        </div>
+        <div className={cn('text')}>
+          {comment.text}
+        </div>
+        <button className={cn('btn-answer')} onClick={() => {setNewComment(comment.parent._id);
+                setReply(comment._id)}}>
+          Ответить
+        </button> 
+      </>
+      }
       {hasChildren && (
         <div className={limitChildren ? cn('reply') : ''}>
           {comment.children.map((comment) => (
@@ -75,10 +84,9 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
               key={comment._id}
               newComment={newComment}
               setNewComment={setNewComment}
+              setReply={setReply}
             />
           ))}
-
-          
         </div>
       )}
     </div>
@@ -91,7 +99,8 @@ CommentCard.propTypes = {
   exists: PropTypes.bool,
   idUSer: PropTypes.string,
   newComment: PropTypes.string,
-  setNewComment: PropTypes.func
+  setNewComment: PropTypes.func,
+  setReply: PropTypes.func
 };
 
 CommentCard.defaultProps = {

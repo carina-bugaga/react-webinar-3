@@ -6,13 +6,8 @@
   display: flex;
 }
 
-.CommentCard-wrapper-child {
-  margin-left: 30px;
-}
-
 .CommentCard-wrapper-child-login {
   display: flex;
-  margin-left: 30px;
 }
 
 .CommentCard-user {
@@ -69,7 +64,7 @@
 }
 
 .CommentCard-btn-cansel {
-  margin: 30px 0 0 5px;
+  margin: 0 0 0 5px;
   font-family: 'Arial';
   font-style: normal;
   font-weight: 400;
@@ -112,10 +107,6 @@
   margin-right: 10px;
   width: 90px;
   height: 21px;
-}
-
-.CommentCard-login {
-  margin-top: 30px;
 }
 
 .CommentCard-reply {
