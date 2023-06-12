@@ -1,5 +1,5 @@
 import {createContext, useMemo, useState} from "react";
-import translate from "./translate";
+import useServices from '../hooks/use-services';
 
 /**
  * @type {React.Context<{}>}
@@ -12,17 +12,17 @@ export const I18nContext = createContext({});
  * @return {JSX.Element}
  */
 export function I18nProvider({children}) {
-
-  const [lang, setLang] = useState('ru');
+  const services = useServices();
+  const [locale, setLocale] = useState(() => services.i18n.locale);
 
   const i18n = useMemo(() => ({
     // Код локали
-    lang,
+    lang: locale,
     // Функция для смены локали
-    setLang,
+    setLang: setLocale,
     // Функция для локализации текстов с замыканием на код языка
-    t: (text, number) => translate(lang, text, number)
-  }), [lang]);
+    t: (text, number) => services.i18n.translate(locale, text, number)
+  }), [locale]);
 
   return (
     <I18nContext.Provider value={i18n}>

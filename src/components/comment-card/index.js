@@ -5,7 +5,7 @@ import './style.css';
 import formatDate from "../../utils/format-date";
 import { Link } from "react-router-dom";
 
-function CommentCard({addComment, comment, exists, idUser, newComment, setNewComment, setReply}) {
+function CommentCard({addComment, comment, exists, idUser, newComment, setNewComment, setReply, t}) {
   const cn = bem('CommentCard');
   // Scroll к новому ответу
   useEffect(() => {
@@ -28,17 +28,17 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
       <>
         {exists ?
           <div className={cn('wrapper-child')}>
-            <div className={cn('subtitle')}>Новый ответ</div>
+            <div className={cn('subtitle')}>{t('comment.newReply')}</div>
             <textarea className={cn('textarea')} type='text' onChange={(e) => setText(e.target.value)}/>
             <div className={cn('btn-wrapper')}>
               <button className={cn('btn')}  id="reply" onClick={() => {if(text.trim() !== '') {setReply("delete");
                 submit(comment.parent._id);}}}>
-                Отправить
+                {t('comment.send')}
               </button>
               <button className={cn('btn')} onClick={() => {setNewComment('');
                 setReply("delete");
             }}>
-                Отмена
+                {t('comment.cancel')}
               </button>
             </div>
           </div>
@@ -48,8 +48,8 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
               <div className={cn('login')} id="reply">
                 <Link to='/login'>Войдите</Link>, чтобы иметь возможность комментировать. 
               </div>
-              <button className={cn('btn-cansel')} onClick={() => setNewComment('')}>
-                Отмена
+              <button className={cn('btn-cancel')} onClick={() => setNewComment('')}>
+                {t('comment.cancel')}
               </button>
             </div>
           </>
@@ -69,7 +69,7 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
         </div>
         <button className={cn('btn-answer')} onClick={() => {setNewComment(comment.parent._id);
                 setReply(comment._id)}}>
-          Ответить
+          {t('comment.reply')}
         </button> 
       </>
       }
@@ -85,6 +85,7 @@ function CommentCard({addComment, comment, exists, idUser, newComment, setNewCom
               newComment={newComment}
               setNewComment={setNewComment}
               setReply={setReply}
+              t={t}
             />
           ))}
         </div>
@@ -100,11 +101,13 @@ CommentCard.propTypes = {
   idUSer: PropTypes.string,
   newComment: PropTypes.string,
   setNewComment: PropTypes.func,
-  setReply: PropTypes.func
+  setReply: PropTypes.func,
+  t: PropTypes.func
 };
 
 CommentCard.defaultProps = {
   addComment: () => {},
+  t: (text) => text
 }
 
 export default memo(CommentCard);

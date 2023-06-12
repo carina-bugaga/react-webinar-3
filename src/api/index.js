@@ -6,9 +6,10 @@ class APIService {
    */
   constructor(services, config = {}) {
     this.services = services;
-    this.config = config
+    this.config = config;
     this.defaultHeaders = {
       'Content-Type': 'application/json',
+      'Accept-Language': this.services.i18n.locale,
     }
   }
 

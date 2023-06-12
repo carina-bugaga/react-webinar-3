@@ -20,7 +20,6 @@ class Store {
      * catalog: CatalogState,
      * modals: ModalsState,
      * article: ArticleState,
-     * locale: LocaleState,
      * categories: CategoriesState,
      * session: SessionState,
      * profile: ProfileState
@@ -52,7 +51,6 @@ class Store {
    * catalog: Object,
    * modals: Object,
    * article: Object,
-   * locale: Object,
    * categories: Object,
    * session: Object,
    * profile: Object,
